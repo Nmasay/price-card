@@ -76,6 +76,7 @@ h1, h2 {
     font-weight: bold;
     font-size: 39px; /* 初期値 (JSで変更可能) */
     justify-content: center; /* 中央揃えpx; /* 少し大きめに */
+    padding-right: 40px;
 }
 
 .notes-row {
@@ -101,7 +102,7 @@ h1, h2 {
 #barcode {
     position: absolute;
     top: 110px; /* 上からの位置 */
-    right: 5px; /* 右からの位置 */
+    right: 20px; /* 右からの位置 */
     width: auto; /* 幅は自動調整 */
     /* 高さはJSで設定 */
     z-index: 10; /* 他の要素より手前に */
