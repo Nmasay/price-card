@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         previewCondition.textContent = selectedOption.text;
 
         // 備考
-        previewNotes.textContent = notesTextarea.value || '備考欄';
+        previewNotes.textContent = notesTextarea.value || '';
         previewNotes.style.fontSize = notesFontSizeInput.value + 'px';
 
         // 金額
