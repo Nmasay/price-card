@@ -39,9 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
         let baseNumberStr = 0;
 
         if (condition === '中古') {
-            baseNumberStr = 20788000000; 
+            baseNumberStr = 27075000000; 
         } else { // 未使用
-            baseNumberStr = 27075000000;
+            baseNumberStr = 27074000000;
         }
 
         // BigInt を使って大きな数値を扱う
