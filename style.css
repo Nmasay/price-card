@@ -75,7 +75,7 @@ h1, h2 {
     color: red;
     font-weight: bold;
     font-size: 39px; /* 初期値 (JSで変更可能) */
-    justify-content: center; /* 中央揃えpx; /* 少し大きめに */
+    justify-content: left; /* 中央揃えpx; /* 少し大きめに */
     padding-right: 40px;
     padding-top: 35px;
 }
@@ -103,7 +103,7 @@ h1, h2 {
 #barcode {
     position: absolute;
     top: 150px; /* 上からの位置 */
-    right: 20px; /* 右からの位置 */
+    right: 30px; /* 右からの位置 */
     width: auto; /* 幅は自動調整 */
     /* 高さはJSで設定 */
     z-index: 10; /* 他の要素より手前に */
@@ -247,7 +247,7 @@ button:hover {
     }
     #barcode {
         top: 150px !important;
-        right: 5px !important;
+        right: 30px !important;
     }
     #timestamp {
         bottom: 5px !important;
