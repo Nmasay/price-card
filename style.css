@@ -77,7 +77,7 @@ h1, h2 {
     font-size: 39px; /* 初期値 (JSで変更可能) */
     justify-content: center; /* 中央揃えpx; /* 少し大きめに */
     padding-right: 40px;
-    padding-top: 30px;
+    padding-top: 35px;
 }
 
 .notes-row {
@@ -246,7 +246,7 @@ button:hover {
         visibility: visible !important; /* 明示的に表示 */
     }
     #barcode {
-        top: 110px !important;
+        top: 150px !important;
         right: 5px !important;
     }
     #timestamp {
