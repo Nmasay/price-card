@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const totalNumber = baseNumber + priceBigInt;
 
             // 12桁に整形 (先頭ゼロ埋め)
-            let barcodeDigits = totalNumber.toString().slice(-12).padStart(13, '0');
+            let barcodeDigits = totalNumber.toString().slice(-12).padStart(12, '0');
 
             // チェックデジット計算
             const checkDigit = calculateEan13CheckDigit(barcodeDigits);
