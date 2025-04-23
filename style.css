@@ -112,7 +112,7 @@ h1, h2 {
 /* 作成日時 */
 #timestamp {
     position: absolute;
-    bottom: 15px; /* 下からの位置 */
+    bottom: 30px; /* 下からの位置 */
     right: 5px; /* 右からの位置 */
     font-size: 10pt;
     color: #555;
