@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let baseNumberStr = '';
 
         if (condition === '中古') {
-            baseNumberStr = '0207880000000';
+            baseNumberStr = '207880000000'; //テストで頭0を削除
         } else { // 未使用
             baseNumberStr = '0270750000000';
         }
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // JsBarcodeで生成
                 JsBarcode(barcodeSvg, finalBarcodeValue, {
                     format: "EAN13",
-                    width: 1, // ★ バーの幅を1に設定 (デフォルトは2)
+                    width: 2, // ★ バーの幅を1に設定 (デフォルトは2)
                     height: 25, // デフォルトの半分 (デフォルトは50?)
                     displayValue: true, // 数値を表示
                     fontSize: 12, // 数値のフォントサイズ
