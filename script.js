@@ -36,12 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function generateBarcode() {
         const price = parseInt(priceInput.value, 10) || 0;
         const condition = conditionSelect.value;
-        let baseNumberStr = '';
+        let baseNumberStr = 0;
 
         if (condition === '中古') {
-            baseNumberStr = '207880000000'; //テストで頭0を削除
+            baseNumberStr = 207880000000; 
         } else { // 未使用
-            baseNumberStr = '0270750000000';
+            baseNumberStr = 270750000000;
         }
 
         // BigInt を使って大きな数値を扱う
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const totalNumber = baseNumber + priceBigInt;
 
             // 12桁に整形 (先頭ゼロ埋め)
-            let barcodeDigits = totalNumber.toString().slice(-12).padStart(12, '0');
+            let barcodeDigits = totalNumber.toString().slice(-12).padStart(13, '0');
 
             // チェックデジット計算
             const checkDigit = calculateEan13CheckDigit(barcodeDigits);
