@@ -102,7 +102,7 @@ h1, h2 {
 /* バーコード */
 #barcode {
     position: absolute;
-    top: 110px; /* 上からの位置 */
+    top: 130px; /* 上からの位置 */
     right: 20px; /* 右からの位置 */
     width: auto; /* 幅は自動調整 */
     /* 高さはJSで設定 */
