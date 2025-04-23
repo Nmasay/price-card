@@ -71,7 +71,7 @@ h1, h2 {
 }
 
 .condition-row {
-    height: 2cm;
+    height: 2.5cm;
     color: red;
     font-weight: bold;
     font-size: 39px; /* 初期値 (JSで変更可能) */
@@ -86,7 +86,7 @@ h1, h2 {
     justify-content: flex-start; /* 左寄せ */
     font-size: 20px; /* 初期値 (JSで変更可能) */
     align-items: flex-start; /* 上寄せ */
-    padding-top: 5px; /* 上部に少しパディング */
+    padding-top: 5px 10px; /* 上部に少しパディング */
     white-space: pre-wrap; /* 改行を反映 */
     word-break: break-all; /* 長い単語も折り返す */
 }
