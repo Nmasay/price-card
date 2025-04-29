@@ -7,7 +7,7 @@ body {
 
 .container {
     /* max-width: 800px; */ /* 元の値 */
-    max-width: 1500px; /* 横並びのため広げる (値は調整してください) */
+    max-width: 1200px; /* 横並びのため広げる (値は調整してください) */
     margin: auto;
     background: #fff;
     padding: 20px;
@@ -38,7 +38,7 @@ h1, h2 {
 /* プライスカード本体 (ハガキサイズ 横: 148mm, 縦: 100mm) */
 #price-card {
     width: 148mm;
-    height: 100mm;
+    height: 105mm;
     border: 1px solid #ccc;
     background-color: #fff;
     padding: 0.5mm; /* 余白 */
@@ -170,7 +170,7 @@ button:hover {
 
     /* ページの基本設定 */
     @page {
-        size: 148mm 100mm landscape; /* ハガキサイズ 横向き */
+        size: 148mm 105mm landscape; /* ハガキサイズ 横向き */
         margin: 0mm; /* プリンターのデフォルトマージンを極力なくす */
     }
 
@@ -182,7 +182,7 @@ button:hover {
         line-height: normal !important;
         font-family: sans-serif !important;
         width: 148mm; /* body自体の幅も印刷サイズに合わせる */
-        height: 100mm; /* body自体の高さも印刷サイズに合わせる */
+        height: 105mm; /* body自体の高さも印刷サイズに合わせる */
         overflow: hidden; /* はみ出し防止 */
         visibility: visible !important; /* body自体は表示 */
     }
@@ -220,7 +220,7 @@ button:hover {
         left: 0 !important;
         top: 0 !important;
         width: 148mm !important; /* 印刷サイズを明示的に指定 */
-        height: 100mm !important; /* 印刷サイズを明示的に指定 */
+        height: 105mm !important; /* 印刷サイズを明示的に指定 */
         margin: 0 !important; /* マージンをリセット */
         padding: 0.5mm !important; /* 画面用のパディングを維持 */
         border: none !important; /* 枠線を維持 */
