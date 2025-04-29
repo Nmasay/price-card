@@ -7,7 +7,7 @@ body {
 
 .container {
     /* max-width: 800px; */ /* 元の値 */
-    max-width: 1200px; /* 横並びのため広げる (値は調整してください) */
+    max-width: 1000px; /* 横並びのため広げる (値は調整してください) */
     margin: auto;
     background: #fff;
     padding: 20px;
