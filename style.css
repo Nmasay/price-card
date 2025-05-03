@@ -56,7 +56,7 @@ h1, h2 {
     align-items: center; /* 垂直中央揃え */
     justify-content: center; /* 水平中央揃え (デフォルト) */
     padding: 0 5px; /* 左右に少しパディング */
-    overflow: hidden; /* 内容がはみ出さないように */
+    overflow: visible; /* 内容がはみ出さないように */
     
 }
 #price-card .card-row:last-child {
@@ -183,7 +183,7 @@ button:hover {
         font-family: sans-serif !important;
         width: 148mm; /* body自体の幅も印刷サイズに合わせる */
         height: 105mm; /* body自体の高さも印刷サイズに合わせる */
-        overflow: hidden; /* はみ出し防止 */
+        overflow: visible; /* はみ出し防止 */
         visibility: visible !important; /* body自体は表示 */
     }
     
