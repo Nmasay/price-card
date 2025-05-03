@@ -2,9 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- DOM要素の取得 ---
     const titleInput = document.getElementById('title');
     const titleFontSizeInput = document.getElementById('title-font-size');
+    const titleFontSizeValueSpan = document.getElementById('title-font-size-value'); // ★ スライダーの値表示用span
     const conditionSelect = document.getElementById('condition');
     const notesTextarea = document.getElementById('notes');
     const notesFontSizeInput = document.getElementById('notes-font-size');
+    const notesFontSizeValueSpan = document.getElementById('notes-font-size-value'); // ★ 備考スライダーの値表示用span
     const priceInput = document.getElementById('price');
     const printButton = document.getElementById('print-button');
 
@@ -143,10 +145,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- イベントリスナーの設定 ---
     titleInput.addEventListener('input', updatePreview);
-    titleFontSizeInput.addEventListener('input', updatePreview);
+    // ★ タイトル文字サイズスライダーのイベントリスナー
+    titleFontSizeInput.addEventListener('input', () => {
+        titleFontSizeValueSpan.textContent = titleFontSizeInput.value; // ★ 数値表示を更新
+        updatePreview(); // ★ プレビューも更新
+    });
     conditionSelect.addEventListener('change', updatePreview);
     notesTextarea.addEventListener('input', updatePreview);
-    notesFontSizeInput.addEventListener('input', updatePreview);
+    // ★ 備考文字サイズスライダーのイベントリスナー
+    notesFontSizeInput.addEventListener('input', () => {
+        notesFontSizeValueSpan.textContent = notesFontSizeInput.value; // ★ 数値表示を更新
+        updatePreview(); // ★ プレビューも更新
+    });
     priceInput.addEventListener('input', updatePreview);
     const reloadButton = document.getElementById('reload-button');
     // ★ リセット（リロード）ボタンのクリックイベント
