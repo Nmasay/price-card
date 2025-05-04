@@ -263,10 +263,15 @@ document.addEventListener('DOMContentLoaded', () => {
     printButton.addEventListener('click', () => {
         // 印刷前に最新の状態を反映 (念のため)
         updatePreview();
-        // 少し待ってから印刷ダイアログを開く (スタイル適用や描画のため)
-        setTimeout(() => {
-            window.print();
-        }, 100);
+
+        // 印刷ダイアログが閉じた後にページをリロードする
+        window.onafterprint = () => {
+            location.reload();
+            window.onafterprint = null; // イベントリスナーを削除 (念のため)
+        };
+
+        // 印刷ダイアログを開く
+        window.print();
     });
 
     // --- 初期表示 ---
