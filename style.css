@@ -70,6 +70,64 @@ h1, h2 {
     font-weight: bold;
 }
 
+/* --- 商品タイトル履歴リストのスタイル --- */
+.title-input-container {
+    position: relative; /* 履歴リストの位置決めの基準 */
+  }
+  
+  .history-list {
+    display: none; /* 初期状態は非表示 */
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-top: none; /* 上の罫線は不要な場合 */
+    width: calc(100% - 2px); /* Input幅に合わせる (border分引く) */
+    max-height: 150px; /* リストの最大高さ */
+    overflow-y: auto; /* 高さを超えたらスクロール */
+    z-index: 10; /* 他の要素より手前に表示 */
+    box-sizing: border-box; /* padding/borderをwidth/heightに含める */
+    margin-top: -1px; /* inputのborderと重ねる */
+  }
+  
+  .history-item {
+    padding: 8px 10px;
+    cursor: pointer;
+    display: flex; /* 横並び配置 */
+    justify-content: space-between; /* 両端揃え */
+    align-items: center; /* 上下中央揃え */
+    border-bottom: 1px solid #eee; /* 項目間の区切り線 */
+  }
+  .history-item:last-child {
+      border-bottom: none; /* 最後の項目は線なし */
+  }
+  
+  .history-item:hover {
+    background-color: #f0f0f0; /* ホバー時の背景色 */
+  }
+  
+  .history-item span {
+    flex-grow: 1; /* テキスト部分が幅を占めるように */
+    margin-right: 10px; /* テキストとボタンの間隔 */
+    overflow: hidden;   /* 長いテキストは隠す */
+    text-overflow: ellipsis; /* 省略記号(...)を表示 */
+    white-space: nowrap; /* 折り返し禁止 */
+  }
+  
+  .history-item button {
+    background: none;
+    border: none;
+    color: #dc3545; /* 赤系の色 */
+    cursor: pointer;
+    font-size: 1.1em; /* 少し大きめに */
+    padding: 0 5px;
+    line-height: 1; /* ボタンの縦サイズ調整 */
+    flex-shrink: 0; /* ボタンが縮まないように */
+  }
+  .history-item button:hover {
+    color: #a71d2a; /* ホバー時少し濃く */
+  }
+
+  
 .condition-row {
     height: 2.5cm;
     color: red;

@@ -30,7 +30,13 @@
         <form id="input-form">
             <div class="form-group">
                 <label for="title">商品タイトル:</label>
-                <input type="text" id="title" value="" placeholder="商品タイトル">
+                <!-- list属性とdatalistを削除 -->
+                <div class="title-input-container"> <!-- ★ 履歴リストの位置決め用コンテナ -->
+                    <input type="text" id="title" name="title" placeholder="商品タイトル" autocomplete="off"> <!-- autocompleteをoffに -->
+                    <div id="title-history-list" class="history-list"></div> <!-- ★ 履歴リスト表示用div -->
+                </div>
+
+                </datalist>
             </div>
             <div class="form-group">
                 <label for="title-font-size">タイトル文字サイズ (px):</label>
@@ -58,7 +64,6 @@
                 <input type="number" id="price" value="1100" min="0">
             </div>
             <button type="button" id="print-button">印刷</button>
-            <button type="button" id="reload-button">リセット</button>
 
         </form>
     </div>

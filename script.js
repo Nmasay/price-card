@@ -16,8 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const previewPrice = document.getElementById('preview-price');
     const barcodeSvg = document.getElementById('barcode');
     const timestampDiv = document.getElementById('timestamp');
-    const priceCardDiv = document.getElementById('price-card'); // 金額リサイズ用
     const priceRowDiv = document.querySelector('.price-row'); // 金額リサイズ用
+    //const titleHistoryDatalist = document.getElementById('title-history'); // ★ タイトル履歴用datalist
+    const titleHistoryListDiv = document.getElementById('title-history-list'); // ★ 履歴リスト表示用div
+    const titleHistoryKey = 'productTitleHistory'; // ★ localStorageのキー
 
     // --- EAN-13 チェックデジット計算関数 ---
     function calculateEan13CheckDigit(digits) {
@@ -143,13 +145,111 @@ document.addEventListener('DOMContentLoaded', () => {
         updateTimestamp();
     }
 
+    // --- タイトル履歴の読み込みとリスト表示 ---
+    function loadTitleHistory() {
+        const history = JSON.parse(localStorage.getItem(titleHistoryKey)) || [];
+        //titleHistoryDatalist.innerHTML = ''; // 既存のoptionをクリア
+        titleHistoryListDiv.innerHTML = ''; // 既存のリストをクリア
+
+        // ★ 入力中のテキストで履歴をフィルタリング
+        const filterText = titleInput.value.trim().toLowerCase();
+        const filteredHistory = history.filter(title => title.toLowerCase().includes(filterText));
+
+        filteredHistory.forEach(title => {
+            const itemDiv = document.createElement('div');
+            itemDiv.classList.add('history-item');
+
+            const titleSpan = document.createElement('span');
+            titleSpan.textContent = title;
+            // ★ 項目クリックで入力欄にタイトルを設定し、リストを閉じる
+            titleSpan.addEventListener('click', () => {
+                titleInput.value = title;
+                titleHistoryListDiv.style.display = 'none';
+                updatePreview(); // プレビューも更新
+                // 必要ならフォーカスを外すなど
+                // titleInput.blur();
+            });
+
+            const deleteButton = document.createElement('button');
+            deleteButton.innerHTML = '&times;'; // バツ印 (×)
+            deleteButton.title = '履歴から削除'; // ツールチップ
+            // ★ 削除ボタンクリックで履歴から削除
+            deleteButton.addEventListener('click', (event) => {
+                event.stopPropagation(); // 親要素(itemDiv)へのクリックイベント伝播を阻止
+                removeTitleFromHistory(title);
+            });
+
+            itemDiv.appendChild(titleSpan);
+            itemDiv.appendChild(deleteButton);
+            titleHistoryListDiv.appendChild(itemDiv);
+        });
+
+        // ★ フィルタリングされた結果がある場合のみリストを表示
+        titleHistoryListDiv.style.display = filteredHistory.length > 0 ? 'block' : 'none';
+    }
+
+    // --- タイトル履歴から削除 ---
+    function removeTitleFromHistory(titleToRemove) {
+        let history = JSON.parse(localStorage.getItem(titleHistoryKey)) || [];
+        history = history.filter(title => title !== titleToRemove);
+        localStorage.setItem(titleHistoryKey, JSON.stringify(history));
+        loadTitleHistory(); // リスト表示を更新
+    }
+
+    // --- タイトル履歴への追加 ---
+    function addTitleToHistory(title) {
+        if (!title) return; // 空文字は追加しない
+        let history = JSON.parse(localStorage.getItem(titleHistoryKey)) || [];
+        // 重複チェック
+        if (!history.includes(title)) {
+            history.unshift(title); // 新しいものを先頭に追加
+            // 必要であれば履歴の最大件数を制限する (例: 最新100件)
+            // history = history.slice(0, 100);
+            localStorage.setItem(titleHistoryKey, JSON.stringify(history));
+            // loadTitleHistory(); // blur時にリストを再読み込みする必要は必ずしもないかも
+        }
+    }
+
     // --- イベントリスナーの設定 ---
-    titleInput.addEventListener('input', updatePreview);
+    // ★ タイトル入力時に履歴リストをフィルタリング表示
+    titleInput.addEventListener('input', () => {
+        loadTitleHistory();
+        updatePreview(); // プレビューも更新
+    });
+    // ★ タイトル入力欄フォーカス時に履歴リスト表示
+    titleInput.addEventListener('focus', () => {
+        loadTitleHistory(); // フォーカス時にもリスト読み込み・表示
+    });
+
+    // ★ タイトル入力欄からフォーカスが外れたら履歴に追加
+    titleInput.addEventListener('blur', () => {
+        // 少し遅延させて、リスト内のクリック操作を可能にする
+        setTimeout(() => {
+            // リストが表示されていなければ（＝リスト項目がクリックされなかった場合）
+            if (getComputedStyle(titleHistoryListDiv).display === 'none') {
+                 addTitleToHistory(titleInput.value.trim());
+            }
+        }, 150); // 150ミリ秒待つ (リスト項目のクリックイベントが先に処理されるように)
+    });
+
+    // ★ ドキュメント全体をクリックしたときにリストを閉じる（入力欄とリスト以外がクリックされた場合）
+    document.addEventListener('click', (event) => {
+        if (!titleInput.contains(event.target) && !titleHistoryListDiv.contains(event.target)) {
+            titleHistoryListDiv.style.display = 'none';
+        }
+    });
+
+    // titleInput.addEventListener('input', updatePreview); // inputイベントは上で処理するので不要に
     // ★ タイトル文字サイズスライダーのイベントリスナー
     titleFontSizeInput.addEventListener('input', () => {
         titleFontSizeValueSpan.textContent = titleFontSizeInput.value; // ★ 数値表示を更新
         updatePreview(); // ★ プレビューも更新
     });
+    /* ★ タイトル入力欄からフォーカスが外れたら履歴に追加 (blurイベントは上で処理)
+    titleInput.addEventListener('blur', () => {
+        addTitleToHistory(titleInput.value.trim());
+    });
+    */
     conditionSelect.addEventListener('change', updatePreview);
     notesTextarea.addEventListener('input', updatePreview);
     // ★ 備考文字サイズスライダーのイベントリスナー
@@ -157,13 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
         notesFontSizeValueSpan.textContent = notesFontSizeInput.value; // ★ 数値表示を更新
         updatePreview(); // ★ プレビューも更新
     });
-    priceInput.addEventListener('input', updatePreview);
-    const reloadButton = document.getElementById('reload-button');
-    // ★ リセット（リロード）ボタンのクリックイベント
-    reloadButton.addEventListener('click', () => {
-        // ページ全体をリロードする
-        location.reload();
-    });
+    priceInput.addEventListener('input', updatePreview); // ★ 金額入力のリスナー
 
     // 印刷ボタン
     printButton.addEventListener('click', () => {
@@ -176,6 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 初期表示 ---
+    //loadTitleHistory(); // ★ ページ読み込み時に履歴を読み込む
     updatePreview();
 
     // ウィンドウリサイズ時にも金額フォントサイズを再調整
