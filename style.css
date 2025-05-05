@@ -1,15 +1,50 @@
+/* --- ヘッダー --- */
+.site-header {
+    background-color: #ffffff; /* ヘッダーの背景色 (例: さらに濃いグレー) */
+    color: #000000; /* ヘッダー内のテキスト色 */
+    padding: 10px 20px; /* 上下のパディング、左右のパディング */
+    display: flex; /* ロゴとタイトルを横並び */
+    align-items: center; /* 垂直方向中央揃え */
+    /* justify-content: space-between; */ /* ロゴとタイトルを両端に配置する場合 */
+    gap: 15px; /* ロゴとタイトルの間の隙間 */
+}
+
+.logo-container {
+    /* ロゴコンテナのスタイル (必要に応じて) */
+    flex-shrink: 0; /* ロゴが縮まないように */
+}
+
+.site-logo {
+    height: 40px; /* ロゴの高さ (例) */
+    width: auto; /* 幅は自動調整 */
+    display: block; /* 余計な隙間を防ぐ */
+}
+
+.site-title {
+    font-size: 1.8em; /* タイトルのフォントサイズ */
+    margin: 0; /* デフォルトのマージンをリセット */
+    font-weight: bold;
+}
+
+/* --- 既存のスタイル調整 --- */
 body {
     font-family: sans-serif;
     line-height: 1.6;
-    margin: 20px;
-    background-color: #333;
+    margin: 0; /* bodyのマージンをリセット */
+    /* background-color: #7c7878; */ /* 単色背景はコメントアウト */
+    background-image: url('images/backimage.jpg'); /* ここに背景画像のパスを指定 */
+    background-size: cover; /* 画面全体を覆うように画像を拡大縮小 */
+    background-position: center center; /* 画像を中央に配置 */
+    background-repeat: no-repeat; /* 画像を繰り返さない */
+    background-attachment: fixed; /* スクロールしても背景画像を固定 */
+    background-color: #7c7878; /* 画像が読み込めない場合の背景色 */
 }
 
 .container {
     /* max-width: 800px; */ /* 元の値 */
     max-width: 1000px; /* 横並びのため広げる (値は調整してください) */
     margin: auto;
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.85); /* コンテナの背景は白のまま */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -17,11 +52,12 @@ body {
     display: flex; /* 子要素 (#preview-container, #input-form) を横並びにする */
     gap: 30px; /* プレビューとフォームの間の隙間 (値は調整してください) */
     align-items: center; /* 上端揃えにする (中央揃えなら center,充魔を揃えるなら flex-start*/
-    
+    margin-top: 20px; /* ヘッダーとの間にマージンを追加 */
+    margin-bottom: 20px; /* 下部にもマージンを追加 */
 }
 
 h1, h2 {
-    text-align: center;
+    /* text-align: center; */ /* ヘッダータイトルには適用しないのでコメントアウト or site-title で上書き */
     margin-bottom: 20px;
 }
 
@@ -170,7 +206,7 @@ h1, h2 {
 /* 作成日時 */
 #timestamp {
     position: absolute;
-    bottom: 5px; /* 下からの位置 */
+    bottom: 15px; /* 下からの位置 */
     right: 5px; /* 右からの位置 */
     font-size: 10pt;
     color: #555;
@@ -330,8 +366,3 @@ button:hover {
         white-space: nowrap !important; /* 改行しない設定を維持 */
     }
 }
-
-
-
-
-
