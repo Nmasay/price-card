@@ -1,22 +1,19 @@
-/* --- ヘッダー --- */
 .site-header {
-    background-color: #ffffff; /* ヘッダーの背景色 (例: さらに濃いグレー) */
-    color: #000000; /* ヘッダー内のテキスト色 */
-    padding: 10px 20px; /* 上下のパディング、左右のパディング */
+    background-color: #ffffff;
+    color: #000000;
+    padding: 10px 20px; /* 上下 左右 */
     display: flex; /* ロゴとタイトルを横並び */
     align-items: center; /* 垂直方向中央揃え */
-    /* justify-content: space-between; */ /* ロゴとタイトルを両端に配置する場合 */
     gap: 15px; /* ロゴとタイトルの間の隙間 */
 }
 
 .logo-container {
-    /* ロゴコンテナのスタイル (必要に応じて) */
     flex-shrink: 0; /* ロゴが縮まないように */
 }
 
 .site-logo {
-    height: 40px; /* ロゴの高さ (例) */
-    width: auto; /* 幅は自動調整 */
+    height: 40px; /* ロゴの高さ */
+    width: auto;
     display: block; /* 余計な隙間を防ぐ */
 }
 
@@ -26,12 +23,10 @@
     font-weight: bold;
 }
 
-/* --- 既存のスタイル調整 --- */
 body {
     font-family: sans-serif;
     line-height: 1.6;
     margin: 0; /* bodyのマージンをリセット */
-    /* background-color: #7c7878; */ /* 単色背景はコメントアウト */
     background-image: url('images/backimage.jpg'); /* ここに背景画像のパスを指定 */
     background-size: cover; /* 画面全体を覆うように画像を拡大縮小 */
     background-position: center center; /* 画像を中央に配置 */
@@ -41,14 +36,12 @@ body {
 }
 
 .container {
-    /* max-width: 800px; */ /* 元の値 */
     max-width: 1000px; /* 横並びのため広げる (値は調整してください) */
     margin: auto;
-    background: rgba(255, 255, 255, 0.85); /* コンテナの背景は白のまま */
+    background: rgba(255, 255, 255, 0.85); /* 半透明の白背景 */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    /* ▼▼▼ 追加 ▼▼▼ */
     display: flex; /* 子要素 (#preview-container, #input-form) を横並びにする */
     gap: 30px; /* プレビューとフォームの間の隙間 (値は調整してください) */
     align-items: center; /* 上端揃えにする (中央揃えなら center,充魔を揃えるなら flex-start*/
@@ -57,7 +50,6 @@ body {
 }
 
 h1, h2 {
-    /* text-align: center; */ /* ヘッダータイトルには適用しないのでコメントアウト or site-title で上書き */
     margin-bottom: 20px;
 }
 
@@ -76,7 +68,7 @@ h1, h2 {
     width: 148mm;
     height: 105mm;
     border: 1px solid #ccc;
-    background-color: #fff;
+    background-color: #fff; /* カード背景は白 */
     padding: 0.5mm; /* 余白 */
     box-sizing: border-box; /* paddingを含めてサイズ計算 */
     position: relative; /* 子要素の絶対配置の基準 */
@@ -94,9 +86,6 @@ h1, h2 {
     padding: 0 5px; /* 左右に少しパディング */
     overflow: visible; /* 内容がはみ出さないように */
     
-}
-#price-card .card-row:last-child {
-    border-bottom: none; /* 最後の行の区切り線は消す */
 }
 
 /* 各行の高さとスタイル */
@@ -138,7 +127,6 @@ h1, h2 {
   }
   
   .history-item:hover {
-    background-color: #f0f0f0; /* ホバー時の背景色 */
   }
   
   .history-item span {
@@ -151,16 +139,14 @@ h1, h2 {
   
   .history-item button {
     background: none;
-    border: none;
-    color: #dc3545; /* 赤系の色 */
+    border: none;    color: #dc3545;
     cursor: pointer;
     font-size: 1.1em; /* 少し大きめに */
     padding: 0 5px;
     line-height: 1; /* ボタンの縦サイズ調整 */
     flex-shrink: 0; /* ボタンが縮まないように */
   }
-  .history-item button:hover {
-    color: #a71d2a; /* ホバー時少し濃く */
+  .history-item button:hover {    color: #a71d2a;
   }
 
   
@@ -169,7 +155,7 @@ h1, h2 {
     color: red;
     font-weight: bold;
     font-size: 39px; /* 初期値 (JSで変更可能) */
-    justify-content: left; /* 中央揃えpx; /* 少し大きめに */
+    justify-content: left; /* 左寄せ */
     padding-right: 40px;
     padding-top: 35px;
 }
@@ -198,7 +184,7 @@ h1, h2 {
     position: absolute;
     top: 150px; /* 上からの位置 */
     right: 30px; /* 右からの位置 */
-    width: auto; /* 幅は自動調整 */
+    width: auto;
     /* 高さはJSで設定 */
     z-index: 10; /* 他の要素より手前に */
 }
@@ -213,7 +199,6 @@ h1, h2 {
     z-index: 10;
 }
 
-/* フォーム */
 #input-form {
     margin-top: 20px;
 }
@@ -281,9 +266,11 @@ button:hover {
         visibility: visible !important; /* body自体は表示 */
     }
     
+    /* 印刷対象外の要素を非表示 */
     body * {
         visibility: hidden;
     }
+    /* 印刷対象のカードのみ表示 */
     #price-card {
         visibility: visible !important;
     }
@@ -350,7 +337,7 @@ button:hover {
         color: #555 !important; /* 色を維持 */
     }
 
-    /* 各行のスタイルを微調整 (必要に応じて) */
+    /* 印刷時の各行スタイル */
     
     .condition-row {
         color: red !important; 

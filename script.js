@@ -1,25 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- DOM要素の取得 ---
     const titleInput = document.getElementById('title');
     const titleFontSizeInput = document.getElementById('title-font-size');
-    const titleFontSizeValueSpan = document.getElementById('title-font-size-value'); // ★ スライダーの値表示用span
+    const titleFontSizeValueSpan = document.getElementById('title-font-size-value');
     const conditionSelect = document.getElementById('condition');
     const notesTextarea = document.getElementById('notes');
     const notesFontSizeInput = document.getElementById('notes-font-size');
-    const notesFontSizeValueSpan = document.getElementById('notes-font-size-value'); // ★ 備考スライダーの値表示用span
+    const notesFontSizeValueSpan = document.getElementById('notes-font-size-value');
     const priceInput = document.getElementById('price');
     const printButton = document.getElementById('print-button');
 
     const previewTitle = document.getElementById('preview-title');
     const previewCondition = document.getElementById('preview-condition');
     const previewNotes = document.getElementById('preview-notes');
-    const previewPrice = document.getElementById('preview-price');
+    const previewPrice = document.getElementById('preview-price'); // 金額表示用
     const barcodeSvg = document.getElementById('barcode');
     const timestampDiv = document.getElementById('timestamp');
-    const priceRowDiv = document.querySelector('.price-row'); // 金額リサイズ用
-    //const titleHistoryDatalist = document.getElementById('title-history'); // ★ タイトル履歴用datalist
-    const titleHistoryListDiv = document.getElementById('title-history-list'); // ★ 履歴リスト表示用div
-    const titleHistoryKey = 'productTitleHistory'; // ★ localStorageのキー
+    const priceRowDiv = document.querySelector('.price-row'); // 金額表示エリア (フォントサイズ調整用)
+    const titleHistoryListDiv = document.getElementById('title-history-list'); // 履歴リスト表示用div
+    const titleHistoryKey = 'productTitleHistory'; // localStorageのキー
 
     // --- EAN-13 チェックデジット計算関数 ---
     function calculateEan13CheckDigit(digits) {
@@ -42,10 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const condition = conditionSelect.value;
         let baseNumberStr = 0;
 
+        // 状態に応じてバーコードのプレフィックスを変更
         if (condition === '中古') {
-            baseNumberStr = 27075000000; 
+            baseNumberStr = 27075000000; // 中古品用プレフィックス
         } else { // 未使用
-            baseNumberStr = 27074000000;
+            baseNumberStr = 27074000000; // 未使用品用プレフィックス
         }
 
         // BigInt を使って大きな数値を扱う
@@ -54,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const priceBigInt = BigInt(price);
             const totalNumber = baseNumber + priceBigInt;
 
-            // 12桁に整形 (先頭ゼロ埋め)
+            // チェックデジット計算用に12桁に整形 (先頭ゼロ埋め)
             let barcodeDigits = totalNumber.toString().slice(-12).padStart(12, '0');
 
             // チェックデジット計算
@@ -66,13 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 // JsBarcodeで生成
                 JsBarcode(barcodeSvg, finalBarcodeValue, {
                     format: "EAN13",
-                    width: 1.5, // ★ バーの幅を1に設定 (デフォルトは2)
-                    height: 25, // デフォルトの半分 (デフォルトは50?)
+                    width: 1.5, // バーの幅
+                    height: 25, // バーの高さ
                     displayValue: true, // 数値を表示
                     fontSize: 12, // 数値のフォントサイズ
-                    margin: 5,// バーコード周りの余白
-                    background: "transparent",// ★ 背景を透明に設定
-                    textPosition: "bottom",
+                    margin: 5, // バーコード周りの余白
+                    background: "transparent", // 背景を透明に
+                    textPosition: "bottom", // 数値の表示位置
                     textMargin: 2,
                     font: "Arial"
                 });
@@ -84,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (e) {
             console.error("Barcode generation error:", e);
-            // エラー発生時はバーコードを非表示にするか、エラー表示を出す
             barcodeSvg.style.display = 'none';
         }
     }
@@ -96,11 +94,12 @@ document.addEventListener('DOMContentLoaded', () => {
         previewPrice.style.fontSize = fontSize + 'px';
 
         // 要素の幅がコンテナ幅を超える限りフォントサイズを小さくする
+        // TODO: 現在コメントアウト中。必要に応じて有効化または削除。
         /*while (previewPrice.scrollWidth > containerWidth && fontSize > 10) {
             fontSize -= 1;
             previewPrice.style.fontSize = fontSize + 'px';
-       } */
-    }
+        }*/
+     }
 
     // --- タイムスタンプ更新関数 ---
     function updateTimestamp() {
@@ -138,20 +137,19 @@ document.addEventListener('DOMContentLoaded', () => {
         // 金額フォントサイズ調整
         adjustPriceFontSize();
 
-        // バーコード生成
+        // バーコード更新
         generateBarcode();
 
-        // タイムスタンプ更新 (毎回更新しても良いし、初回と印刷時だけでも良い)
+        // タイムスタンプ更新
         updateTimestamp();
     }
 
     // --- タイトル履歴の読み込みとリスト表示 ---
     function loadTitleHistory() {
         const history = JSON.parse(localStorage.getItem(titleHistoryKey)) || [];
-        //titleHistoryDatalist.innerHTML = ''; // 既存のoptionをクリア
-        titleHistoryListDiv.innerHTML = ''; // 既存のリストをクリア
+        titleHistoryListDiv.innerHTML = ''; // リストをクリア
 
-        // ★ 入力中のテキストで履歴をフィルタリング
+        // 入力中のテキストで履歴をフィルタリング
         const filterText = titleInput.value.trim().toLowerCase();
         const filteredHistory = history.filter(title => title.toLowerCase().includes(filterText));
 
@@ -161,18 +159,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const titleSpan = document.createElement('span');
             titleSpan.textContent = title;
-            // ★ 項目クリックで入力欄にタイトルを設定し、リストを閉じる
+            // 項目クリックで入力欄にタイトルを設定し、リストを閉じる
             titleSpan.addEventListener('click', () => {
                 titleInput.value = title;
                 titleHistoryListDiv.style.display = 'none';
-                updatePreview(); // プレビューも更新
-                // 必要ならフォーカスを外すなど
-                // titleInput.blur();
+                updatePreview();
             });
 
             const deleteButton = document.createElement('button');
             deleteButton.innerHTML = '&times;'; // バツ印 (×)
-            deleteButton.title = '履歴から削除'; // ツールチップ
+            deleteButton.title = '履歴から削除';
             // ★ 削除ボタンクリックで履歴から削除
             deleteButton.addEventListener('click', (event) => {
                 event.stopPropagation(); // 親要素(itemDiv)へのクリックイベント伝播を阻止
@@ -184,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
             titleHistoryListDiv.appendChild(itemDiv);
         });
 
-        // ★ フィルタリングされた結果がある場合のみリストを表示
+        // フィルタリングされた結果がある場合のみリストを表示
         titleHistoryListDiv.style.display = filteredHistory.length > 0 ? 'block' : 'none';
     }
 
@@ -205,51 +201,43 @@ document.addEventListener('DOMContentLoaded', () => {
             history.unshift(title); // 新しいものを先頭に追加
             // 必要であれば履歴の最大件数を制限する (例: 最新100件)
             // history = history.slice(0, 100);
-            localStorage.setItem(titleHistoryKey, JSON.stringify(history));
-            // loadTitleHistory(); // blur時にリストを再読み込みする必要は必ずしもないかも
+            localStorage.setItem(titleHistoryKey, JSON.stringify(history));;
         }
     }
 
     // --- イベントリスナーの設定 ---
-    // ★ タイトル入力時に履歴リストをフィルタリング表示
+    // タイトル入力時に履歴リストをフィルタリング表示 & プレビュー更新
     titleInput.addEventListener('input', () => {
         loadTitleHistory();
-        updatePreview(); // プレビューも更新
+        updatePreview();
     });
-    // ★ タイトル入力欄フォーカス時に履歴リスト表示
+    // タイトル入力欄フォーカス時に履歴リスト表示
     titleInput.addEventListener('focus', () => {
-        loadTitleHistory(); // フォーカス時にもリスト読み込み・表示
+        loadTitleHistory();
     });
 
-    // ★ タイトル入力欄からフォーカスが外れたら履歴に追加
+    // タイトル入力欄からフォーカスが外れたら履歴に追加
     titleInput.addEventListener('blur', () => {
         // 少し遅延させて、リスト内のクリック操作を可能にする
         setTimeout(() => {
-            // リストが表示されていなければ（＝リスト項目がクリックされなかった場合）
+            // リストが非表示の場合（＝リスト項目がクリックされなかった場合）のみ履歴追加
             if (getComputedStyle(titleHistoryListDiv).display === 'none') {
                  addTitleToHistory(titleInput.value.trim());
             }
         }, 150); // 150ミリ秒待つ (リスト項目のクリックイベントが先に処理されるように)
     });
 
-    // ★ ドキュメント全体をクリックしたときにリストを閉じる（入力欄とリスト以外がクリックされた場合）
+    // ドキュメント全体をクリックしたときにリストを閉じる（入力欄とリスト以外がクリックされた場合）
     document.addEventListener('click', (event) => {
         if (!titleInput.contains(event.target) && !titleHistoryListDiv.contains(event.target)) {
             titleHistoryListDiv.style.display = 'none';
         }
     });
 
-    // titleInput.addEventListener('input', updatePreview); // inputイベントは上で処理するので不要に
-    // ★ タイトル文字サイズスライダーのイベントリスナー
     titleFontSizeInput.addEventListener('input', () => {
-        titleFontSizeValueSpan.textContent = titleFontSizeInput.value; // ★ 数値表示を更新
-        updatePreview(); // ★ プレビューも更新
+        titleFontSizeValueSpan.textContent = titleFontSizeInput.value; // スライダーの数値を表示
+        updatePreview();
     });
-    /* ★ タイトル入力欄からフォーカスが外れたら履歴に追加 (blurイベントは上で処理)
-    titleInput.addEventListener('blur', () => {
-        addTitleToHistory(titleInput.value.trim());
-    });
-    */
     conditionSelect.addEventListener('change', updatePreview);
     notesTextarea.addEventListener('input', updatePreview);
     // ★ 備考文字サイズスライダーのイベントリスナー
@@ -257,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
         notesFontSizeValueSpan.textContent = notesFontSizeInput.value; // ★ 数値表示を更新
         updatePreview(); // ★ プレビューも更新
     });
-    priceInput.addEventListener('input', updatePreview); // ★ 金額入力のリスナー
+    priceInput.addEventListener('input', updatePreview);
 
     // 印刷ボタン
     printButton.addEventListener('click', () => {
@@ -275,7 +263,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 初期表示 ---
-    //loadTitleHistory(); // ★ ページ読み込み時に履歴を読み込む
     updatePreview();
 
     // ウィンドウリサイズ時にも金額フォントサイズを再調整
