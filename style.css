@@ -1,10 +1,12 @@
 .site-header {
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.85); /* 半透明の白背景 (コンテナと同じ透過度) */
     color: #000000;
     padding: 10px 20px; /* 上下 左右 */
     display: flex; /* ロゴとタイトルを横並び */
     align-items: center; /* 垂直方向中央揃え */
     gap: 15px; /* ロゴとタイトルの間の隙間 */
+    border-bottom-left-radius: 8px; /* 左下の角を丸くする */
+    border-bottom-right-radius: 8px; /* 右下の角を丸くする */
 }
 
 .logo-container {
@@ -45,7 +47,7 @@ body {
     display: flex; /* 子要素 (#preview-container, #input-form) を横並びにする */
     gap: 30px; /* プレビューとフォームの間の隙間 (値は調整してください) */
     align-items: center; /* 上端揃えにする (中央揃えなら center,充魔を揃えるなら flex-start*/
-    margin-top: 20px; /* ヘッダーとの間にマージンを追加 */
+    margin-top: 50px; /* ヘッダーとの間のマージンを少し広げる */
     margin-bottom: 20px; /* 下部にもマージンを追加 */
 }
 
@@ -127,6 +129,7 @@ h1, h2 {
   }
   
   .history-item:hover {
+    background-color: #f0f0f0; /* ホバー時に背景を薄いグレーに */
   }
   
   .history-item span {
