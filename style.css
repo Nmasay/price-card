@@ -2,14 +2,14 @@ body {
     font-family: sans-serif;
     line-height: 1.6;
     margin: 20px;
-    background-color: #f0f0f086;
+    background-color: #333;
 }
 
 .container {
     /* max-width: 800px; */ /* 元の値 */
     max-width: 1000px; /* 横並びのため広げる (値は調整してください) */
     margin: auto;
-    background: #fff;
+    background: #ffffff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -28,7 +28,7 @@ h1, h2 {
 #preview-container {
     margin-bottom: 30px;
     padding: 20px;
-    background-color: #eee;
+    background-color: #1979ff;
     border-radius: 5px;
     display: flex; /* 中央揃えのため */
     justify-content: center; /* 中央揃えのため */
