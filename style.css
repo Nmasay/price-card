@@ -336,7 +336,7 @@ button:hover {
         right: 30px !important;
     }
     #timestamp {
-        bottom: 5px !important;
+        bottom: 15px !important;
         right: 5px !important;
         font-size: 8pt !important; /* フォントサイズ維持 */
         color: #555 !important; /* 色を維持 */
