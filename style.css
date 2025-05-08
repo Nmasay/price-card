@@ -152,7 +152,60 @@ h1, h2 {
   .history-item button:hover {    color: #a71d2a;
   }
 
-  
+  /* スライダー全体のスタイル調整 */
+input[type="range"] {
+    -webkit-appearance: none; /* Safari, Chrome, Edge */
+    appearance: none;
+    width: 100%; /* スライダーの幅を親要素に合わせる */
+    height: 10px; /* スライダーのトラックの高さを調整 */
+    background: #8d8d8d; /* スライダーのトラックの背景色 */
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 5px; /* トラックの角を丸くする */
+}
+
+input[type="range"]:hover {
+    opacity: 1; /* ホバー時に少し濃くする */
+}
+
+/* スライダーのつまみ（thumb）のスタイル */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background-image: linear-gradient(180deg, #007bff 0%, #0056b3 100%); /* 青系のグラデーション */
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25), /* 外側の影 */
+                inset 0px 1px 1px rgba(255, 255, 255, 0.3); /* 内側のハイライト */
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    background-image: linear-gradient(180deg, #0069d9 0%, #004085 100%); /* ホバー時少し濃いグラデーション */
+    box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.3),
+                inset 0px 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+    transform: scale(0.95); /* クリック時に少し小さくする */
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background-image: linear-gradient(180deg, #007bff 0%, #0056b3 100%);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none; /* Firefoxでのデフォルトの枠線を消す */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25),
+                inset 0px 1px 1px rgba(255, 255, 255, 0.3);
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
+
 .condition-row {
     height: 2.5cm;
     color: red;
@@ -161,6 +214,57 @@ h1, h2 {
     justify-content: left; /* 左寄せ */
     padding-right: 40px;
     padding-top: 35px;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+    background-image: linear-gradient(180deg, #0069d9 0%, #004085 100%);
+    box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.3),
+                inset 0px 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+input[type="range"]::-moz-range-thumb:active {
+    transform: scale(0.95);
+}
+
+/* 印刷ボタンのスタイル */
+#print-button {
+    display: inline-block; /* ボタンとしての適切な表示 */
+    padding: 12px 25px;    /* 内側の余白（上下左右） */
+    font-size: 16px;       /* 文字サイズ */
+    font-weight: bold;     /* 文字を太く */
+    color: white;          /* 文字色を白に */
+    text-align: center;    /* 文字を中央揃え */
+    text-decoration: none; /* テキストの下線を消す */
+    border: none;          /* デフォルトの境界線を消す */
+    border-radius: 8px;    /* 角を少し丸くする */
+    cursor: pointer;       /* マウスカーソルを指マークに */
+    margin-top: 5px;      /* 上の要素との間隔 */
+
+    /* スライダーつまみと合わせたグラデーション背景 */
+    background-image: linear-gradient(180deg, #007bff 0%, #0056b3 100%);
+    /* スライダーつまみと合わせたシャドウ */
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2), /* 外側の影 */
+                inset 0px 1px 1px rgba(255, 255, 255, 0.3); /* 内側のハイライト */
+    /* アニメーション効果 */
+    transition: background-image 0.2s ease-in-out, transform 0.1s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+#print-button:hover {
+    background-image: linear-gradient(180deg, #0069d9 0%, #004085 100%); /* ホバー時少し濃いグラデーション */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25),
+                inset 0px 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+#print-button:active {
+    transform: translateY(1px) scale(0.98); /* クリック時に少し沈み、わずかに小さくなる */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2), /* 影を少し浅く */
+                inset 0px 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+/* 状態セレクトボックスの高さ調整 */
+#condition {
+    padding-top: 12px;    /* 上側の内側余白 */
+    padding-bottom: 12px; /* 下側の内側余白 */
 }
 
 .notes-row {
@@ -198,7 +302,7 @@ h1, h2 {
     bottom: 15px; /* 下からの位置 */
     right: 5px; /* 右からの位置 */
     font-size: 10pt;
-    color: #555;
+    color: #000000;
     z-index: 10;
 }
 
@@ -338,7 +442,7 @@ button:hover {
         bottom: 15px !important;
         right: 5px !important;
         font-size: 8pt !important; /* フォントサイズ維持 */
-        color: #555 !important; /* 色を維持 */
+        color: #000000 !important; /* 色を維持 */
     }
 
     /* 印刷時の各行スタイル */
