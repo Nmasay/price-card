@@ -6,6 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const notesTextarea = document.getElementById('notes');
     const notesFontSizeInput = document.getElementById('notes-font-size');
     const notesFontSizeValueSpan = document.getElementById('notes-font-size-value');
+
+    // Set initial text for notes font size span
+    notesFontSizeValueSpan.textContent = notesFontSizeInput.value;
+
     const priceInput = document.getElementById('price');
     const printButton = document.getElementById('print-button');
 
@@ -95,10 +99,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 要素の幅がコンテナ幅を超える限りフォントサイズを小さくする
         // TODO: 現在コメントアウト中。必要に応じて有効化または削除。
-        /*while (previewPrice.scrollWidth > containerWidth && fontSize > 10) {
+    while (previewPrice.scrollWidth > containerWidth && fontSize > 10) {
             fontSize -= 1;
             previewPrice.style.fontSize = fontSize + 'px';
-        }*/
+    }
      }
 
     // --- タイムスタンプ更新関数 ---
