@@ -393,7 +393,7 @@ button:hover {
         padding-top: 0.5mm !important;
         padding-right: 0.7mm !important; /* 右パディングを 0.5mm + 0.2mm = 0.7mm に */
         padding-bottom: 0.5mm !important;
-        padding-left: 0.5mm !important;
+        padding-left: 0.8mm !important;
         background-color: transparent !important; /* 背景を透明に */
         border: none !important;
         box-shadow: none !important;
