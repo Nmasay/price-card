@@ -270,10 +270,10 @@ input[type="range"]::-moz-range-thumb:active {
 .notes-row {
     height: 1.6cm;
     color: blue;
-    justify-content: flex-start; /* 左寄せ */
+    justify-content: center; /* 中央揃え */
     font-size: 20px; /* 初期値 (JSで変更可能) */
     align-items: flex-start; /* 上寄せ */
-    padding-top: 5px 10px; /* 上部に少しパディング */
+    padding: 5px 10px; /* 上下に5px、左右に10pxのパディング */
     white-space: pre-wrap; /* 改行を反映 */
     word-break: break-all; /* 長い単語も折り返す */
 }
