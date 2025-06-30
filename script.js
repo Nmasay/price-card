@@ -263,6 +263,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 初期表示 ---
+    // スライダーの初期値をスパンに表示
+    titleFontSizeValueSpan.textContent = titleFontSizeInput.value;
+    notesFontSizeValueSpan.textContent = notesFontSizeInput.value;
+
     updatePreview();
 
     // ウィンドウリサイズ時にも金額フォントサイズを再調整

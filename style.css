@@ -271,7 +271,7 @@ input[type="range"]::-moz-range-thumb:active {
     height: 1.6cm;
     color: blue;
     justify-content: center; /* 中央揃え */
-    font-size: 20px; /* 初期値 (JSで変更可能) */
+    font-size: 30px; /* 初期値 (JSで変更可能) */
     align-items: flex-start; /* 上寄せ */
     text-align: center; /* テキストを中央揃え */
     padding: 5px 10px; /* 上下に5px、左右に10pxのパディング */
