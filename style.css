@@ -211,7 +211,7 @@ input[type="range"]::-moz-range-thumb {
     color: red;
     font-weight: bold;
     font-size: 39px; /* 初期値 (JSで変更可能) */
-    justify-content: left; /* 左寄せ */
+    justify-content: flex-start; /* 左寄せ */
     padding-right: 40px;
     padding-top: 35px;
 }
@@ -273,6 +273,7 @@ input[type="range"]::-moz-range-thumb:active {
     justify-content: center; /* 中央揃え */
     font-size: 20px; /* 初期値 (JSで変更可能) */
     align-items: flex-start; /* 上寄せ */
+    text-align: center; /* テキストを中央揃え */
     padding: 5px 10px; /* 上下に5px、左右に10pxのパディング */
     white-space: pre-wrap; /* 改行を反映 */
     word-break: break-all; /* 長い単語も折り返す */
